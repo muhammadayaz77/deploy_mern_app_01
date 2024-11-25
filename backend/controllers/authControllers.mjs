@@ -10,7 +10,7 @@ export let login = async(req,res) => {
       if(!existedUser) return res.status(401).send("You don't have an account")
       await bcrypt.compare(password,existedUser.password,(err,result)=>{
       if(result == true){
-        let token = generateJWT(user)
+        let token = generateJWT(existedUser)
         res.send(token);
       }
       else{
