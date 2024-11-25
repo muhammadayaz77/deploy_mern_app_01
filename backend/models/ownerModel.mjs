@@ -9,7 +9,6 @@ let ownerSchema = new mongoose.Schema({
     unique : true
   },
   password : String,
-  isadmin : Boolean,
   products : {
     type : Array,
     default : [],

@@ -12,7 +12,6 @@ let PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(cors());
 connectDB();
-
 app.use('/owners',ownerRouter)
 app.use('/users',userRouter )
 app.use('/products',productRouter)
