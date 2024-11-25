@@ -14,7 +14,7 @@ export let login = async(req,res) => {
         res.send(token);
       }
       else{
-        res.send("Email or Password is incorrect.");
+        res.send("Email or Password is incorrect");
       }
       })
     } catch (error) {
