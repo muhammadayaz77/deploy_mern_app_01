@@ -8,9 +8,7 @@ let PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(cors());
 connectDB();
-app.get("/ping",(req,res)=>{
-  res.send("pong");
-})
+
 
 app.listen(PORT,()=>{
   console.log(`http://localhost:${PORT}`);
