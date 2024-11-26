@@ -1,8 +1,11 @@
 import axios from 'axios';
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { login } from '../redux/authSlice';
 let url = 'http://localhost:3000/users/login'
 function Login() {
-  let [data,setData] = useState({
+  let dispatch = useDispatch();
+    let [data,setData] = useState({
     email : '',
     password : ''
   })
@@ -23,6 +26,7 @@ function Login() {
     })
     .then(res => {
       console.log(res.data)
+      dispatch(login()); 
       // localStorage.setItem("token",res.data)
       })
     .catch(err => console.log(err))

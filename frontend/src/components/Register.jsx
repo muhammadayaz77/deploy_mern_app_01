@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import { useDispatch } from 'react-redux'
 let url = 'http://localhost:3000/users/register'
 function Register() {
+  let dispatch = useDispatch();
   let [data,setData] = useState({
     fullname : '',
     email : '',
@@ -19,7 +21,9 @@ function Register() {
     axios.post(url,data)
     .then(res => {
       console.log(res.data)
-      localStorage.setItem("token",res.data)})
+      localStorage.setItem("token",res.data)
+      useDispatch(login()); 
+    })
     .catch(err => console.log(err))
 
   }
