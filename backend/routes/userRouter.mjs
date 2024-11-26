@@ -4,5 +4,5 @@ import isUserLogin from '../middleware/isUserLogin.mjs'
 let router = express.Router();
 
 router.post("/register",register)
-router.post("/login",isUserLogin,login)
+router.post("/login",login)
 export default router
