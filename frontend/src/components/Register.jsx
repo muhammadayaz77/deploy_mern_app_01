@@ -37,14 +37,15 @@ function Register() {
       <input 
       onChange={handleChange}
       name='fullname'
-      type="text" className='p-2 border-2 border-transparent lg:bg-white bg-[#E0E6EC] w-full outline-none mb-3    ' placeholder='Full Name' />
+      type="text" className='p-2 border-2 border-transparent lg:bg-white bg-[#E0E6EC] w-full outline-none mb-3' placeholder='Full Name' autoComplete='true'/>
       <input 
       onChange={handleChange}
       name='email'
-      type="email" className='p-2 border-2 border-transparent lg:bg-white bg-[#E0E6EC] w-full outline-none mb-3' placeholder='Email' />
+      type="email" className='p-2 border-2 border-transparent lg:bg-white bg-[#E0E6EC] w-full outline-none mb-3' placeholder='Email' autoComplete='true' />
       <input 
       onChange={handleChange}
       name='password'
+       autoComplete='true'
       type="password" className='p-2 border-2 border-transparent lg:bg-white bg-[#E0E6EC] w-full outline-none mb-3' placeholder='Password' />
       <button className='bg-blue-500 p-3 py-2 text-white font-medium tracking-wider text-sm rounded-3xl'>Create My Account</button>
     </form>

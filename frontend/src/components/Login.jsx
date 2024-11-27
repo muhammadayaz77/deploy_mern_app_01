@@ -19,17 +19,13 @@ function Login() {
   let handleLogin = async(e) => {
     e.preventDefault();
     console.log(data)
-    await axios.post(url,data,{
-      headers : {
-      Authorization : localStorage.getItem('token')
-    }
-    })
+    await axios.post(url,data)
     .then(res => {
+      dispatch(login());
       console.log(res.data)
-      dispatch(login()); 
-      // localStorage.setItem("token",res.data)
+      localStorage.setItem("token",res.data);
       })
-    .catch(err => console.log(err))
+    .catch(err => console.log("Error : ",err))
 
   }
   return (
