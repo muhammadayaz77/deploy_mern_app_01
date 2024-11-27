@@ -2,9 +2,11 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { login } from '../redux/authSlice';
+import { useNavigate } from 'react-router-dom';
 let url = 'http://localhost:3000/users/login'
 function Login() {
   let dispatch = useDispatch();
+  let navigate = useNavigate();
     let [data,setData] = useState({
     email : '',
     password : ''
@@ -21,6 +23,7 @@ function Login() {
     console.log(data)
     await axios.post(url,data)
     .then(res => {
+      navigate('/shop');
       dispatch(login());
       console.log(res.data)
       localStorage.setItem("token",res.data);

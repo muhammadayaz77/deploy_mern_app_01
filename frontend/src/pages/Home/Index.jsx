@@ -1,14 +1,16 @@
 import React from 'react'
 import Home from './Home'
-import About from './About'
-import { Route,Routes } from 'react-router'
+import { Route,Routes,Navigate } from 'react-router'
+import { useSelector } from 'react-redux'
+import Shop from './Shop'
 
 function Index() {
+  let isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   return (
     <>
     <Routes>
       <Route path='/' element={<Home />} />
-      <Route path='/about' element={<About />} />
+      <Route path='/shop' element={!isAuthenticated ? <Navigate to='/auth' /> : <Shop />} />
       <Route path='/*' element={<>Page not found</>} />
     </Routes>
     </>

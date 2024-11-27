@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import './App.css'
 import Routes from './pages/Routes'
 import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { login } from './redux/authSlice';
 let url = 'http://localhost:3000/users/home';
 
@@ -19,7 +19,6 @@ function App() {
         }
       })
       .then(res => {
-        dispatch(login());
         console.log(res)
       })
       .catch(err => console.log(err))

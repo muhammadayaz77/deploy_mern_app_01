@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
+import { login } from '../redux/authSlice';
 let url = 'http://localhost:3000/users/register'
 function Register() {
   let dispatch = useDispatch();
+  let navigate = useNavigate();
   let [data,setData] = useState({
     fullname : '',
     email : '',
@@ -22,7 +25,8 @@ function Register() {
     .then(res => {
       console.log(res.data)
       localStorage.setItem("token",res.data)
-      useDispatch(login()); 
+      dispatch(login()); 
+      navigate("/shop");
     })
     .catch(err => console.log(err))
 
