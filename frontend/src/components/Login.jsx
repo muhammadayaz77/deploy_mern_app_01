@@ -25,8 +25,8 @@ function Login() {
     .then(res => {
       navigate('/shop');
       dispatch(login());
-      console.log(res.data)
-      localStorage.setItem("token",res.data);
+      console.log(res.data.token)
+      localStorage.setItem("token",res.data.token);
       })
     .catch(err => console.log("Error : ",err))
 

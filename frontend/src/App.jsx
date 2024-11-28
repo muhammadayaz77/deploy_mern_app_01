@@ -1,31 +1,37 @@
 import React, { useEffect } from 'react'
 import './App.css'
 import Routes from './pages/Routes'
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { login } from './redux/authSlice';
+import { login, logout } from './redux/authSlice';
 let url = 'http://localhost:3000/users/home';
 
 function App() {
-  // let user = useSelector(state => state.auth.isAuthenticated)
+  let isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   let dispatch = useDispatch();
-  useEffect(()=>{
+  let fetchedData = async() => {
     let token = localStorage.getItem('token');
-    if(token){
+    console.log("Home",isAuthenticated);
+    console.log("Home",token);
+    await axios.get(url,{
+      headers : {
+        Authorization : `Bearer ${token}`
+      }
+    })
+    .then(res => {
+      console.log(res);
+      dispatch(login())
 
-      axios.get(url,{
-        headers : {
-          Authorization : `Bearer ${token}`,
-        }
-      })
-      .then(res => {
-        console.log(res)
-      })
-      .catch(err => console.log(err))
-    }
-    else
-    console.log('no token bro')
-    },[])
+    })
+    .catch(err =>  {
+      console.log(err);
+      dispatch(logout())
+    })
+  }
+  useEffect(()=>{
+    fetchedData();
+  },[])
+  
   return (
     <>
     <Routes></Routes>

@@ -10,6 +10,7 @@ function ProtectedRouter({ Component }) {
   if(isAuthenticated == false) return < Navigate to="/auth" />
 
   return(
+    
     <Component />
   )
 }

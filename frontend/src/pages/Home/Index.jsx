@@ -5,12 +5,12 @@ import { useSelector } from 'react-redux'
 import Shop from './Shop'
 
 function Index() {
-  let isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+  // let isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   return (
     <>
     <Routes>
-      <Route path='/' element={<Home />} />
-      <Route path='/shop' element={!isAuthenticated ? <Navigate to='/auth' /> : <Shop />} />
+      {/* <Route path='/' element={<Home />} /> */}
+      <Route path='/' element={<Shop />} />
       <Route path='/*' element={<>Page not found</>} />
     </Routes>
     </>

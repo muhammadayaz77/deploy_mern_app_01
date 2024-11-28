@@ -3,6 +3,8 @@ import { Navigate, Route,Routes } from 'react-router-dom'
 import Auth from './Auth'
 import Home from './Home'
 import { useSelector } from 'react-redux'
+import ProtectedRouter from '../protectedRouter/ProtectedRouter'
+import Shop from './Home/Shop'
 // import ProtectedRouter from '../protectedRouter/protectedRouter.jsx'
 
 function Index() {
@@ -10,8 +12,8 @@ function Index() {
   return (
     <>
     <Routes>
-      <Route path="/auth/*" element={<Auth />} />
-      <Route path="/*" element={<Home />} />
+      <Route path="/auth/*" element={!isAuthenticated ?<Auth /> : <Navigate to='/shop' />} />
+      <Route path="/shop/*" element={<ProtectedRouter Component={Shop} />} />
     </Routes>
     </>
   )

@@ -11,7 +11,7 @@ export let login = async(req,res) => {
       await bcrypt.compare(password,existedUser.password,(err,result)=>{
       if(result == true){
         let token = generateJWT(existedUser)
-        res.send(token);
+        res.send({token : token});
       }
       else{
         res.send("Email or Password is incorrect");
