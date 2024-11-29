@@ -1,19 +1,13 @@
 import React from 'react'
 import Card from './Card'
 
-function CardSection() {
+function CardSection({products}) {
   return (
     <>
     <div className='card grid grid-cols-12 sm:mr-[20px] lg:mr-[200px] md:mr-[50px] gap-5'>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
+      {products.map(item => (
+        <Card item={item}></Card>
+      ))}
     </div>
     </>
   )

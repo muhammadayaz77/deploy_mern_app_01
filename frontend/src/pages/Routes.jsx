@@ -5,6 +5,7 @@ import Home from './Home'
 import { useSelector } from 'react-redux'
 import ProtectedRouter from '../protectedRouter/ProtectedRouter'
 import Shop from './Home/Shop'
+import Owner from './Owner/Owner'
 // import ProtectedRouter from '../protectedRouter/protectedRouter.jsx'
 
 function Index() {
@@ -14,6 +15,7 @@ function Index() {
     <Routes>
       <Route path="/auth/*" element={!isAuthenticated ?<Auth /> : <Navigate to='/shop' />} />
       <Route path="/shop/*" element={<ProtectedRouter Component={Shop} />} />
+      <Route path="/owner" element={<Owner />} />
     </Routes>
     </>
   )

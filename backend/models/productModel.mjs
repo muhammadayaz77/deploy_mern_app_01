@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
 
-let postSchema = new mongoose.Schema({
+let productSchema = new mongoose.Schema({
   
   name : String,
-  image : String,
+  image : Buffer,
   price : Number,
   discount : {
     type : Number,
@@ -15,6 +15,6 @@ let postSchema = new mongoose.Schema({
   textcolor : String,
 })
 
-let postModel = mongoose.model('post',postSchema);
+let productModel = mongoose.model('product',productSchema);
 
-export default postModel;
+export default productModel;

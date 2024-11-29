@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 function Navbar() {
   let dispatch = useDispatch();
   let handleLogout = () => {
-      dispatch(logout())
+  dispatch(logout())
       localStorage.removeItem('token');
     
   }

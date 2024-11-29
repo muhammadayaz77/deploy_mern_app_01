@@ -1,6 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import ownerModel from '../models/ownerModel.mjs';
+import bcrypt from 'bcrypt'
 dotenv.config();
 let router = express.Router();
 
@@ -11,11 +12,12 @@ if(process.env.NODE_ENV == 'development'){
       return res.status(503).send("You don't have permission to create owner");
     }
     let {fullname,email,password} = req.body;
-    let createOwner = await ownerModel.create({
-      fullname,
-      email,
-      password,
-    })
+    let hashedPassword = await bcrypt.hash(password,10);
+      let createOwner = await ownerModel.create({
+        fullname,
+        email,
+        password : hashedPassword
+      });
     res.status(201).send(createOwner);
   })
 }
