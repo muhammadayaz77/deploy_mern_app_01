@@ -4,5 +4,5 @@ dotenv.config();
 
 
 export let generateJWT = (user) => {
-  return jwt.sign({email : user.email,id : user._id},process.env.SECRET_KEY)
+  return jwt.sign({email : user.email,_id : user._id},process.env.SECRET_KEY)
 }

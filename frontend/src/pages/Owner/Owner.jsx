@@ -62,9 +62,20 @@ const Owner = () => {
     e.preventDefault();
     console.log("form : ",formData)
     console.log("image : ",image)
-
-    if (!image) {
-      alert("Please select an image file");
+    let { productName,
+      productPrice,
+      discountPrice,
+      backgroundColor,
+      textColor,
+      panelColor,} = formData;
+    if (!image ||
+      !productName ||
+      !productPrice ||
+      !discountPrice ||
+      !backgroundColor ||
+      !textColor ||
+      !panelColor) {
+      window.toastify("Fill all fields",'error')
       return;
     }
 
@@ -83,8 +94,17 @@ const Owner = () => {
           "Content-Type": "multipart/form-data",
         },
       })
-      .then(res => console.log(res))
-      .then(err => console.log(err))
+      .then(res => {
+        console.log(res)
+        window.toastify("Product Added.","success");
+        return;
+      }
+      )
+      .catch(err => {
+        console.log(err)
+        window.toastify("Something went wrong.","error");
+        return;
+      })
   };
 
   return (

@@ -8,13 +8,13 @@ export let login = async(req,res) => {
       let {email,password} = req.body;
       let existedUser = await userModel.findOne({email});
       if(!existedUser) return res.status(401).send("You don't have an account")
-      await bcrypt.compare(password,existedUser.password,(err,result)=>{
+      bcrypt.compare(password,existedUser.password,(err,result)=>{
       if(result == true){
         let token = generateJWT(existedUser)
-        res.send({token : token});
+        return res.send({token : token});
       }
-      else{
-        res.send("Email or Password is incorrect");
+      else if(result == false){
+        res.status(400).send("Email or Password is incorrect");
       }
       })
     } catch (error) {

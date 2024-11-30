@@ -35,7 +35,7 @@ function Register() {
         navigate("/shop");
       })
       .catch(err => {
-        window.toastify(err.response.data,'error');
+        window.toastify(err.response.data || 'Something went wrong!','error');
         
         console.log(err.response.data)
         

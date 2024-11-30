@@ -7,7 +7,7 @@ function Navbar() {
   let handleLogout = () => {
   dispatch(logout())
       localStorage.removeItem('token');
-    
+      window.toastify("Logout Successfully",'success')
   }
   return (
     <div className='flex justify-between mx-10 my-5'>

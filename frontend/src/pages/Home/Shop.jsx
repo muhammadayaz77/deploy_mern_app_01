@@ -11,7 +11,6 @@ function Shop() {
   let [products,setProducts] = useState([]);
   let fetchedData = async() => {
     let token = localStorage.getItem('token');
-    console.log(token)
     if(token){
       await axios.get(url,{
         headers : {

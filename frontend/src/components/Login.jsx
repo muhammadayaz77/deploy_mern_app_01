@@ -20,16 +20,23 @@ function Login() {
   }
   let handleLogin = async(e) => {
     e.preventDefault();
-    console.log(data)
-    await axios.post(url,data)
-    .then(res => {
-      navigate('/shop');
-      dispatch(login());
+    if(!data.email || !data.password){
+      window.toastify("Fill all fields")
+    }else{
+
+      await axios.post(url,data)
+      .then(res => {
+        navigate('/shop');
+        dispatch(login());
       console.log(res.data.token)
       localStorage.setItem("token",res.data.token);
+      window.toastify('Login Successfully!','success')
       })
-    .catch(err => console.log("Error : ",err))
-
+      .catch(err =>{ 
+        console.log("Error : ",err.response.data)
+        window.toastify(err.response.data || 'Something went wrong','error')
+      })
+    } 
   }
   return (
     <div className='lg:h-[100vh]  flex items-center'>
