@@ -9,7 +9,7 @@ function Card({ item }) {
       : null;
 
   return (
-    <div className=" md:col-span-4 col-span-6 lg:col-span-3 border-2 border-black">
+    <div className=" md:col-span-4 col-span-6 lg:col-span-3">
       {/* Image Section */}
       <div
         style={{ backgroundColor: item.bgcolor || "#f0f0f0" }} // Dynamic background color

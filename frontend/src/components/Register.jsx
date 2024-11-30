@@ -21,14 +21,26 @@ function Register() {
   }
   let handleRegister = e => {
     e.preventDefault();
-    axios.post(url,data)
-    .then(res => {
-      console.log(res.data)
-      localStorage.setItem("token",res.data)
-      dispatch(login()); 
-      navigate("/shop");
-    })
-    .catch(err => console.log(err))
+    let {fullname,email,password} = data;
+    if(!fullname || !email || !password){
+      window.toastify('Fill all fields','error');
+    }else{
+
+      axios.post(url,data)
+      .then(res => {
+        console.log(res.data)
+        localStorage.setItem("token",res.data)
+        dispatch(login()); 
+        window.toastify('User created sucessfully','success');
+        navigate("/shop");
+      })
+      .catch(err => {
+        window.toastify(err.response.data,'error');
+        
+        console.log(err.response.data)
+        
+      })
+    }
 
   }
   return (

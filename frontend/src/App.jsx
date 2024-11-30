@@ -4,6 +4,10 @@ import Routes from './pages/Routes'
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { login, logout } from './redux/authSlice';
+import './config/Global'
+
+import 'react-toastify/dist/ReactToastify.css'
+import Toast from './components/Toast';
 let url = 'http://localhost:3000/users/home';
 
 function App() {
@@ -30,11 +34,12 @@ function App() {
   }
   useEffect(()=>{
     fetchedData();
-  },[])
+  },[]);
   
   return (
     <>
     <Routes></Routes>
+    <Toast></Toast>
     </>
   )
 }
