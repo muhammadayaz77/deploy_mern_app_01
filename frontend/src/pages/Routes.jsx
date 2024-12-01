@@ -13,6 +13,7 @@ function Index() {
   return (
     <>
     <Routes>
+      <Route path="/" element={isAuthenticated ? <Auth /> : <Navigate to='/shop' />} />
       <Route path="/auth/*" element={!isAuthenticated ?<Auth /> : <Navigate to='/shop' />} />
       <Route path="/shop/*" element={<ProtectedRouter Component={Shop} />} />
       <Route path="/owner" element={<Owner />} />

@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import Shop from './Shop'
 
 function Index() {
-  // let isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+  let isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   return (
     <>
     <Routes>

@@ -15,8 +15,6 @@ function App() {
   let dispatch = useDispatch();
   let fetchedData = async() => {
     let token = localStorage.getItem('token');
-    console.log("Home",isAuthenticated);
-    console.log("Home",token);
     await axios.get(url,{
       headers : {
         Authorization : `Bearer ${token}`
