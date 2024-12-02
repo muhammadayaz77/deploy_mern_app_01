@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import Navbar from "../../components/Navbar";
 
 const Owner = () => {
   // const [formData, setFormData] = useState({
@@ -109,6 +110,7 @@ const Owner = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
+      <Navbar></Navbar>
       <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6">
         <h1 className="text-2xl font-bold mb-6">Create New Product</h1>
         <form onSubmit={handleSubmit}>
