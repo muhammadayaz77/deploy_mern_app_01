@@ -21,6 +21,7 @@ function Navbar() {
         {
           !isAdminExist && <Link to='/owner'>Owner</Link>
         }
+        <Link to='/cart'>Cart</Link>
       </div>
       <button 
       onClick={handleLogout}
