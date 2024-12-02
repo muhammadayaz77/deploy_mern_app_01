@@ -8,12 +8,13 @@ let router = express.Router();
 router.post("/register",register);
 router.post("/login",login);
 router.get("/home",isUserLogin,home)
-router.get("/shop",isUserLogin,async(req,res) => {
+router.get("/shop", isUserLogin, async (req, res) => {
   try {
     const product = await productModel.find();
-    res.json({product})
+    return res.status(200).json({ product });
   } catch (error) {
-    console.log(error.message)
+    return res.status(500).json({ message: error.message });
   }
-})
+});
+
 export default router;

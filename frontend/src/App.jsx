@@ -47,10 +47,18 @@ function App() {
       // dispatch(isAdmin(false));
     })
   }
-  useEffect(()=>{
-    getVerifyAdmin();
-    fetchedData();
-  },[]);
+  useEffect(() => {
+    const fetchData = async () => {
+      console.log('loading')
+      // await getVerifyAdmin();  
+      console.log('midele')
+
+      await fetchedData() ;
+      console.log('end')
+
+    };
+    fetchData();
+  }, [dispatch]);
   
   return (
     <>
