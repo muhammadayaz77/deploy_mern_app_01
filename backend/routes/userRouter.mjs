@@ -5,11 +5,15 @@ import { home } from '../controllers/userController.mjs';
 import productModel from '../models/productModel.mjs';
 let router = express.Router();
 
-router.post("/register",register)
-router.post("/login",login)
+router.post("/register",register);
+router.post("/login",login);
 router.get("/home",isUserLogin,home)
 router.get("/shop",isUserLogin,async(req,res) => {
-  let product = await productModel.find();
-  res.json({product})
+  try {
+    const product = await productModel.find();
+    res.json({product})
+  } catch (error) {
+    console.log(error.message)
+  }
 })
-export default router
+export default router;

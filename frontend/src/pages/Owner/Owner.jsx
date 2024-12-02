@@ -60,8 +60,7 @@ const Owner = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("form : ",formData)
-    console.log("image : ",image)
+    let token = localStorage.getItem('token');
     let { productName,
       productPrice,
       discountPrice,
@@ -92,6 +91,7 @@ const Owner = () => {
       await axios.post("http://localhost:3000/products/create", payload, {
         headers: {
           "Content-Type": "multipart/form-data",
+          "Authorization" : `Bearer ${token}`
         },
       })
       .then(res => {

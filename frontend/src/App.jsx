@@ -8,10 +8,11 @@ import './config/Global'
 
 import 'react-toastify/dist/ReactToastify.css'
 import Toast from './components/Toast';
+import { isAdmin } from './redux/adminSlice';
 let url = 'http://localhost:3000/users/home';
 
 function App() {
-  let isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+  let admin = useSelector(state => state.admin.isAdminExist);
   let dispatch = useDispatch();
   let fetchedData = async() => {
     let token = localStorage.getItem('token');
@@ -21,7 +22,7 @@ function App() {
       }
     })
     .then(res => {
-      console.log(res); 
+      // console.log(res); 
       dispatch(login())
 
     })
@@ -30,7 +31,24 @@ function App() {
       dispatch(logout())
     })
   }
+  let getVerifyAdmin = async() => {
+    let token = localStorage.getItem('token');
+    await axios.get('http://localhost:3000/auth/verify-admin',{
+      headers : {
+        Authorization : `Bearer ${token}`
+      }
+    })
+    .then(res => {
+      dispatch(isAdmin(res.data.isAdmin));
+      console.log(admin);
+    })
+    .catch(err => {
+      console.log(err)
+      // dispatch(isAdmin(false));
+    })
+  }
   useEffect(()=>{
+    getVerifyAdmin();
     fetchedData();
   },[]);
   
