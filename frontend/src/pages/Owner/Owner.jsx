@@ -1,38 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
 import Navbar from "../../components/Navbar";
+import { useSelector } from "react-redux";
 
 const Owner = () => {
-  // const [formData, setFormData] = useState({
-  //   productName: "",
-  //   productPrice: "",
-  //   discountPrice: "",
-  //   backgroundColor: "",
-  //   textColor: "",
-  //   panelColor: "",
-  // });
-
-  // const [image, setImage] = useState(null);
-
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData({ ...formData, [name]: value });
-  // };
-
-  // const handleImageChange = (e) => {
-  //   setImage(e.target.files[0]);
-  // };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log("Form Data:", formData);
-  //   console.log("Image File:", image);
-  // };
-
-
-
-
-  // jhjhhhhhhhhhh
+  let {isAdminExist} = useSelector(state => state.auth);
+  console.log(isAdminExist)
   const [formData, setFormData] = useState({
     productName: "",
     productPrice: "",

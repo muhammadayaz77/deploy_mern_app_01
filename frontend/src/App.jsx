@@ -12,7 +12,7 @@ import { isAdmin } from './redux/adminSlice';
 let url = 'http://localhost:3000/users/home';
 
 function App() {
-  let admin = useSelector(state => state.admin.isAdminExist);
+  let {isAdminExist} = useSelector(state => state.admin);
   let dispatch = useDispatch();
   let fetchedData = async() => {
     let token = localStorage.getItem('token');
@@ -39,8 +39,9 @@ function App() {
       }
     })
     .then(res => {
-      dispatch(isAdmin(res.data.isAdmin));
-      console.log(admin);
+      console.log(res)
+      dispatch(isAdmin(res.data.isadmin));
+      console.log(isAdminExist)
     })
     .catch(err => {
       console.log(err)
@@ -49,16 +50,13 @@ function App() {
   }
   useEffect(() => {
     const fetchData = async () => {
-      console.log('loading')
-      // await getVerifyAdmin();  
-      console.log('midele')
-
+      
       await fetchedData() ;
-      console.log('end')
+      await getVerifyAdmin();  
 
     };
     fetchData();
-  }, [dispatch]);
+  }, [isAdminExist]);
   
   return (
     <>

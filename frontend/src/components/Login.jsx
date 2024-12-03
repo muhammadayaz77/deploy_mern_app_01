@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { login } from '../redux/authSlice';
 import { useNavigate } from 'react-router-dom';
+import { isAdmin } from '../redux/adminSlice';
 let url = 'http://localhost:3000/users/login'
 function Login() {
   let dispatch = useDispatch();
@@ -22,13 +23,16 @@ function Login() {
     e.preventDefault();
     if(!data.email || !data.password){
       window.toastify("Fill all fields")
-    }else{
+    }
+    else{
 
       await axios.post(url,data)
       .then(res => {
         navigate('/shop');
         dispatch(login());
-      console.log(res.data.token)
+        if(data.email == 'admin@gmail.com' && data.password == 'admin123'){
+          dispatch(isAdmin(true));
+      }
       localStorage.setItem("token",res.data.token);
       window.toastify('Login Successfully!','success')
       })
