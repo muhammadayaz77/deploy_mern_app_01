@@ -1,8 +1,16 @@
 import React from "react";
 import { Buffer } from "buffer";
+import { MdDeleteForever } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
 
 function Cards({ item }) {
   // Check if the image data exists and can be processed
+  let handleDelete = () => {
+    alert('deleted')
+  }
+  let handleEdit = () => {
+    alert('edited')
+  }
   const base64Image =
     item.image && item.image.data
       ? Buffer.from(item.image.data).toString("base64")
@@ -15,6 +23,10 @@ function Cards({ item }) {
         style={{ backgroundColor: item.bgcolor || "#f0f0f0" }} // Dynamic background color
         className="h-[250px] p-10"
       >
+        <div className="flex justify-between my-1 text-xl">
+          <MdDeleteForever onClick={handleDelete} className="text-red-600" />
+          <FaEdit onClick={handleEdit}  className="text-blue-600" />
+        </div>
          
         {base64Image ? (
           <img
