@@ -1,7 +1,8 @@
 import React from 'react'
 import Cards from './Cards'
 
-function OwnerCard({loading,products}) {
+function OwnerCard({loading,products,fetchedData}) {
+ 
  
   return (
     <>
@@ -14,7 +15,7 @@ function OwnerCard({loading,products}) {
       :
       products.map(item => (
         <>
-        <Cards item={item}></Cards>
+        <Cards item={item} fetchedData={fetchedData}></Cards>
         </>
       ))
       }

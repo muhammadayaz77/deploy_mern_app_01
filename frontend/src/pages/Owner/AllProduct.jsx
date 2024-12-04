@@ -21,7 +21,6 @@ function AllProduct() {
       })
       .then(res => {
       setProducts(res.data.product);
-      console.log(products)
       })
       .catch(err => {
       console.log(err) 
@@ -37,7 +36,7 @@ function AllProduct() {
   return (
     <div>
       <p className='text-red-600 my-5'>Delete All</p>
-        <OwnerCard loading={loading} products={products}></OwnerCard>
+        <OwnerCard loading={loading} products={products} setProducts={setProducts} fetchedData={fetchedData}></OwnerCard>
     </div>
   )
 }

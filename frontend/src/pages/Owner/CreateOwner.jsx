@@ -2,8 +2,11 @@ import axios from "axios";
 import React, { useState } from "react";
 import Navbar from "../../components/Navbar";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const CreateOwner = () => {
+  let [loading,setLoading] = useState(false);
+  let navigate = useNavigate();
   let {isAdminExist} = useSelector(state => state.auth);
   console.log(isAdminExist)
   const [formData, setFormData] = useState({
@@ -61,7 +64,7 @@ const CreateOwner = () => {
     payload.append("panelcolor", formData.panelColor);
     payload.append("textcolor", formData.textColor);
     
-
+      setLoading(true);
       await axios.post("http://localhost:3000/products/create", payload, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -69,7 +72,7 @@ const CreateOwner = () => {
         },
       })
       .then(res => {
-        console.log(res)
+        navigate("/shop");
         window.toastify("Product Added.","success");
         return;
       }
@@ -79,6 +82,7 @@ const CreateOwner = () => {
         window.toastify("Something went wrong.","error");
         return;
       })
+      setLoading(false)
   };
 
   return (
@@ -191,9 +195,13 @@ const CreateOwner = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded-lg font-medium hover:bg-blue-600"
+            className={`w-full bg-blue-500 text-white py-2 rounded-lg font-medium hover:bg-blue-600 ${loading && 'cursor-not-allowed'}`}
           >
-            Create New Product
+            {
+              loading ? <span className="loading loading-ring loading-md"></span>
+              :
+            "Create New Product"
+            }
           </button>
         </form>
       </div>

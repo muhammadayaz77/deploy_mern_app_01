@@ -2,11 +2,15 @@ import React from "react";
 import { Buffer } from "buffer";
 import { MdDeleteForever } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
+import axios from 'axios'
 
-function Cards({ item }) {
+function Cards({ item,fetchedData }) {
   // Check if the image data exists and can be processed
-  let handleDelete = () => {
-    alert('deleted')
+  let handleDelete = async(id) => {
+    await axios.delete(`http://localhost:3000/products/delete-product/${id}`)
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+    fetchedData();
   }
   let handleEdit = () => {
     alert('edited')
@@ -24,7 +28,7 @@ function Cards({ item }) {
         className="h-[250px] p-10"
       >
         <div className="flex justify-between my-1 text-xl">
-          <MdDeleteForever onClick={handleDelete} className="text-red-600" />
+          <MdDeleteForever onClick={() => handleDelete(item._id)} className="text-red-600" />
           <FaEdit onClick={handleEdit}  className="text-blue-600" />
         </div>
          
