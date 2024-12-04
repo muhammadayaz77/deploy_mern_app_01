@@ -25,3 +25,21 @@ export const createProduct = async(req,res)=>{
   }
  
  }
+
+export const deleteProduct = async(req,res) => {
+  try {
+    let productID = req.params.id;
+  if(!productID) return res.status(401).json({message : "Product Not found!",success : false})
+  let deleteItem = await productModel.findByIdAndDelete(productID);
+  return res.status(200).json({
+    message : 'Product deleted',
+    product : deleteItem,
+    success : true,
+  })
+  } catch (error) {
+    res.status(404).json({
+      message : error.message,
+      success : false,
+    })
+  }
+}
