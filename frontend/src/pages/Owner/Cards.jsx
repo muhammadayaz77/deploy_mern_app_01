@@ -7,7 +7,12 @@ import axios from 'axios'
 function Cards({ item,fetchedData }) {
   // Check if the image data exists and can be processed
   let handleDelete = async(id) => {
-    await axios.delete(`http://localhost:3000/products/delete-product/${id}`)
+    let token = localStorage.getItem('token');
+    await axios.delete(`http://localhost:3000/products/delete-product/${id}`,{
+      headers : {
+        Authorization : `Bearer ${token}`
+      }
+    })
     .then(res => console.log(res))
     .catch(err => console.log(err))
     fetchedData();
