@@ -7,5 +7,5 @@ import { verifyAdmin } from '../middleware/verifyAdmin.mjs';
 let router = express.Router();
 
 router.post("/create",isUserLogin,verifyAdmin,upload.single('image'),createProduct);
-router.delete('/delete-product/:id',deleteProduct)
+router.delete('/delete-product/:id',isUserLogin,verifyAdmin,deleteProduct);
 export default router
