@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const adminSlice = createSlice({
   name: 'admin',
   initialState: {
-    isAdminExist: JSON.parse(localStorage.getItem('isAdminExist')) || false, // Load from localStorage
+    isAdminExist: localStorage.getItem('isAdminExist') || false, // Load from localStorage
   },
   reducers: {
     isAdmin: (state, action) => {
