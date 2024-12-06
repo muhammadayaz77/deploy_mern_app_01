@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { Buffer } from "buffer";
 import { MdDeleteForever } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import axios from 'axios'
+import Modal from "./Modal";
 
 function Cards({ item,fetchedData }) {
   // Check if the image data exists and can be processed
+  let [toModal,sendToModal] = useState({
+    name : '',
+    bgcolor : '',
+    panelcolor : '',
+    textcolor : '',
+    price : '',
+    discount : '',
+  });
   let handleDelete = async(id) => {
     let token = localStorage.getItem('token');
     await axios.delete(`http://localhost:3000/products/delete-product/${id}`,{
@@ -17,8 +26,10 @@ function Cards({ item,fetchedData }) {
     .catch(err => console.log(err))
     fetchedData();
   }
-  let handleEdit = () => {
-    alert('edited')
+  let handleEdit = (getItem)=>{
+    sendToModal(getItem);
+    console.log(toModal);
+    document.getElementById('my_modal_5').showModal();
   }
   const base64Image =
     item.image && item.image.data
@@ -34,7 +45,7 @@ function Cards({ item,fetchedData }) {
       >
         <div className="flex justify-between my-1 text-xl">
           <MdDeleteForever onClick={() => handleDelete(item._id)} className="text-red-600" />
-          <FaEdit onClick={handleEdit}  className="text-blue-600" />
+          <FaEdit onClick={() => handleEdit(item)}  className="text-blue-600" />
         </div>
          
         {base64Image ? (
@@ -66,6 +77,8 @@ function Cards({ item,fetchedData }) {
           +
         </button>
       </div>
+      {/* Open the modal using document.getElementById('ID').showModal() method */}   
+      <Modal sendToModal={sendToModal} toModal={toModal}></Modal>
     </div>
   );
 }
