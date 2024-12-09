@@ -6,6 +6,7 @@ import dotenv from 'dotenv'
 import userRouter from './routes/userRouter.mjs'
 import productRouter from './routes/productRouter.mjs'
 import authRouter from './routes/authRouter.mjs'
+import cartRouter from './routes/cartRouter.mjs'
 dotenv.config();
 let app = express();
 let PORT = process.env.PORT || 3000;
@@ -15,6 +16,7 @@ connectDB();
 app.use('/users',userRouter )
 app.use('/products',productRouter)
 app.use('/auth',authRouter)
+app.use('/cart',cartRouter)
 
 app.listen(PORT,()=>{
   console.log(`http://localhost:${PORT}`);
