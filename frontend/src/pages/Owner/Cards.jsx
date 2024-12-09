@@ -32,6 +32,8 @@ function Cards({ item, fetchedData }) {
 
   // Handle product update
   const handleUpdate = async (updatedItem) => {
+    console.log(updatedItem);
+
     let token = localStorage.getItem("token");
     await axios
       .put(
@@ -45,7 +47,7 @@ function Cards({ item, fetchedData }) {
       )
       .then((res) => {
         setIsModalOpen(false); // Close modal after update
-        fetchedData(); // Refresh data after update
+        fetchedData(); // Refresh data after update 
       })
       .catch((err) => console.log(err));
   };
