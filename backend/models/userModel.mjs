@@ -18,6 +18,12 @@ let userSchema = new mongoose.Schema({
     default : false,
     require : true
   },
+  cart : [
+    {
+      type : mongoose.Schema.Types.ObjectId,
+      ref : 'product',
+    }
+  ],
   orders : {
     type : Array,
     default : [],
