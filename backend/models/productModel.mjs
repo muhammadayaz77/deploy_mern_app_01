@@ -15,6 +15,6 @@ let productSchema = new mongoose.Schema({
   textcolor : String,
 })
 
-let productModel = mongoose.model('product',productSchema);
+let productModel = mongoose.model('products',productSchema);
 
 export default productModel;

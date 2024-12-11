@@ -19,6 +19,16 @@ export const addToCart = async (req, res) => {
       });
     }
     const user = await userModel.findById({_id : req.user._id});
+    const isProductInCart = user.cart.some(
+      (cartItem) => cartItem.toString() === productId
+    );
+
+    if (isProductInCart) {
+      return res.status(401).json({
+        message : "Product is already in the cart!",
+        success : false
+      });
+    }
     user.cart.push(productId);
     user.save();
     return res.status(200).json({
@@ -55,14 +65,19 @@ export const cartData = async (req, res) => {
         success : false
       })
     }
-    return res.status(200).json({
-      cart : user.cart,
-      message : "All Cart Data",
-      success : true
-    })
+    // return res.status(200).json({
+    //   cart : user.cart,
+    //   message : "All Cart Data",
+    //   success : true
+    // })
     
-  // let post = await userModel.findOne({email:req.user.email}).populate('posts');
-  // res.send(post);
+    const cart = await userModel
+    .findById(userId)
+    .populate({
+      path: "cart",
+      options: { strictPopulate: false }, // Ignore missing references
+    });
+    res.json(cart)
     // Fetch the cart for the specific user and populate product details
     // const cart = await Cart.findOne({ userId })
     //   .populate("products.productId", "name price") // Populate product details (name, price, description)
