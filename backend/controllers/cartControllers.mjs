@@ -60,6 +60,9 @@ export const cartData = async (req, res) => {
       message : "All Cart Data",
       success : true
     })
+    
+  // let post = await userModel.findOne({email:req.user.email}).populate('posts');
+  // res.send(post);
     // Fetch the cart for the specific user and populate product details
     // const cart = await Cart.findOne({ userId })
     //   .populate("products.productId", "name price") // Populate product details (name, price, description)
