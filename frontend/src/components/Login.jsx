@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { login } from '../redux/authSlice';
 import { useNavigate } from 'react-router-dom';
 import { isAdmin } from '../redux/adminSlice';
-let url = 'http://localhost:3000/users/login'
+let url = 'https://deploy-mern-app-01-ecommerce-backend.vercel.app/users/login'
 function Login() {
   let dispatch = useDispatch();
   let navigate = useNavigate();

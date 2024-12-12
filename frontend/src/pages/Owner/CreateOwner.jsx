@@ -65,7 +65,7 @@ const CreateOwner = () => {
     payload.append("textcolor", formData.textColor);
     
       setLoading(true);
-      await axios.post("http://localhost:3000/products/create", payload, {
+      await axios.post("https://deploy-mern-app-01-ecommerce-backend.vercel.app/products/create", payload, {
         headers: {
           "Content-Type": "multipart/form-data",
           "Authorization" : `Bearer ${token}`

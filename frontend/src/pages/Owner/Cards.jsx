@@ -13,7 +13,7 @@ function Cards({ item, fetchedData }) {
   const handleDelete = async (id) => {
     let token = localStorage.getItem("token");
     await axios
-      .delete(`http://localhost:3000/products/delete-product/${id}`, {
+      .delete(`https://deploy-mern-app-01-ecommerce-backend.vercel.app/products/delete-product/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -37,7 +37,7 @@ function Cards({ item, fetchedData }) {
     let token = localStorage.getItem("token");
     await axios
       .put(
-        `http://localhost:3000/products/update-product/${updatedItem._id}`,
+        `https://deploy-mern-app-01-ecommerce-backend.vercel.app/products/update-product/${updatedItem._id}`,
         updatedItem,
         {
           headers: {

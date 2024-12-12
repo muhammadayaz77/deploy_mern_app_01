@@ -4,7 +4,7 @@ import FilterSection from '../../components/FilterSection';
 import CardSection from '../../components/CardSection';
 import axios from 'axios';
 
-let url = 'http://localhost:3000/users/shop';
+let url = 'https://deploy-mern-app-01-ecommerce-backend.vercel.app/users/shop';
 
 function Shop() {
   // let navigate = useNavigate();

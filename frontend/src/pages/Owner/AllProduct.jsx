@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import OwnerCard from './OwnerCards';
 
-let url = 'http://localhost:3000/users/shop';
+let url = 'https://deploy-mern-app-01-ecommerce-backend.vercel.app/users/shop';
 
 function AllProduct() {
   // let navigate = useNavigate();

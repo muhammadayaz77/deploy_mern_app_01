@@ -22,5 +22,6 @@ app.get('/ping',(req,res)=>{
 })
 
 app.listen(PORT,()=>{
+  // https://deploy-mern-app-01-ecommerce-backend.vercel.app/ping
   console.log(`http://localhost:${PORT}`);
 })

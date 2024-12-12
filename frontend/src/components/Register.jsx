@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import { login } from '../redux/authSlice';
-let url = 'http://localhost:3000/users/register'
+let url = 'https://deploy-mern-app-01-ecommerce-backend.vercel.app/users/register'
 function Register() {
   let dispatch = useDispatch();
   let navigate = useNavigate();
