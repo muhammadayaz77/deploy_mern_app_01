@@ -17,6 +17,9 @@ app.use('/users',userRouter )
 app.use('/products',productRouter)
 app.use('/auth',authRouter)
 app.use('/cart',cartRouter)
+app.get('/ping',(req,res)=>{
+  res.send('pong');
+})
 
 app.listen(PORT,()=>{
   console.log(`http://localhost:${PORT}`);
