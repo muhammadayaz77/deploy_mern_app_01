@@ -5,6 +5,7 @@ import userModel from "../models/userModel.mjs";
 export const addToCart = async (req, res) => {
   try {
     const productId = req.params.id;
+    console.log(productId)
     if (!req.params.id) {
       return res.json({
         success: false,
@@ -57,7 +58,6 @@ export const addToCart = async (req, res) => {
 export const cartData = async (req, res) => {
   try {
     const userId = req.user._id; // Assuming the user ID is stored in req.user._id
-    console.log(userId);
     const user = await userModel.findById({_id : userId});
     if(!user){
       return res.status(400).json({
@@ -77,7 +77,11 @@ export const cartData = async (req, res) => {
       path: "cart",
       options: { strictPopulate: false }, // Ignore missing references
     });
-    res.json(cart)
+    res.json({
+      cart,
+      message : "Cart Data",
+      success : true,
+    })
     // Fetch the cart for the specific user and populate product details
     // const cart = await Cart.findOne({ userId })
     //   .populate("products.productId", "name price") // Populate product details (name, price, description)

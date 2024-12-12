@@ -1,5 +1,6 @@
 import React from "react";
 import { Buffer } from "buffer";
+import axios from "axios";
 
 function Card({ item }) {
   // Check if the image data exists and can be processed
@@ -8,6 +9,23 @@ function Card({ item }) {
       ? Buffer.from(item.image.data).toString("base64")
       : null;
 
+    let getIdForCart = async(id) => {
+      let token = localStorage.getItem('token')
+      console.log(token)
+      await axios.post(`http://localhost:3000/cart/addToCart/${id}`,{},{
+        headers : {
+          "Authorization" : `Bearer ${token}`
+        }
+      })
+      .then(res => {
+        window.toastify('Product has been added.','success')
+        console.log(res)
+      })
+      .catch(err => {
+        window.toastify('Already in Cart.','error');
+        console.log(err)
+      })
+    }
   return (
     <div className=" md:col-span-4 col-span-6 lg:col-span-3">
       {/* Image Section */}
@@ -40,7 +58,9 @@ function Card({ item }) {
           <p>{item.name || "Unnamed Product"}</p>
           <p>$ {item.price || "N/A"}</p>
         </div>
-        <button className="w-9 h-9 flex justify-center items-center bg-white rounded-full">
+        <button
+        onClick={()=>getIdForCart(item._id)}
+        className="w-9 h-9 flex justify-center items-center bg-white rounded-full">
           +
         </button>
       </div>

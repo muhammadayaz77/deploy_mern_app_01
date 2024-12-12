@@ -1,18 +1,20 @@
 import React from 'react'
 import { logout } from '../redux/authSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { logoutAdmin } from '../redux/adminSlice';
 
 function Navbar() {
+  let navigate = useNavigate(); 
   let dispatch = useDispatch();
   let {isAdminExist} = useSelector(store => store.admin);
   console.log(isAdminExist);
   let handleLogout = () => {
   dispatch(logout())
   dispatch(logoutAdmin());
+    navigate('/auth');
       localStorage.removeItem('token');
-      window.toastify("Logout Successfully",'success')
+      window.toastify("Logout Successfully",'success');
   }
   
   // console.log(isAdminExist)

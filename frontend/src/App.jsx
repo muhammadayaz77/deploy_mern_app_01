@@ -39,9 +39,7 @@ function App() {
       }
     })
     .then(res => {
-      console.log(res)
       dispatch(isAdmin(res.data.isadmin));
-      console.log(isAdminExist)
     })
     .catch(err => {
       console.log(err)
