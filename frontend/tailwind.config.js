@@ -1,4 +1,3 @@
-// Use import for modules in ES Modules
 import daisyui from 'daisyui';
 
 /** @type {import('tailwindcss').Config} */
