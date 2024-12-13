@@ -1,6 +1,6 @@
 import React from 'react'
 import { Navigate, Route,Routes } from 'react-router-dom'
-import Auth from './Auth'
+import Auth from './Auth/Index.jsx'
 import Home from './Home'
 import { useSelector } from 'react-redux'
 import ProtectedRouter from '../protectedRouter/ProtectedRouter'
