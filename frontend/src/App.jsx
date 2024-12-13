@@ -9,7 +9,7 @@ import './config/Global'
 import 'react-toastify/dist/ReactToastify.css'
 import Toast from './components/Toast';
 import { isAdmin } from './redux/adminSlice';
-let url = 'http://localhost:3000/users/home';
+let url = 'https://deploy-mern-app-01-ecommerce-backend.vercel.app/users/home';
 
 function App() {
   let {isAdminExist} = useSelector(state => state.admin);
@@ -33,7 +33,7 @@ function App() {
   }
   let getVerifyAdmin = async() => {
     let token = localStorage.getItem('token');
-    await axios.get('http://localhost:3000/auth/verify-admin',{
+    await axios.get('https://deploy-mern-app-01-ecommerce-backend.vercel.app/auth/verify-admin',{
       headers : {
         Authorization : `Bearer ${token}`
       }

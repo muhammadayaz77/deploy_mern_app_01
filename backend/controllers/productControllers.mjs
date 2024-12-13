@@ -11,7 +11,7 @@ export const createProduct = async(req,res)=>{
      textcolor ,
    } = req.body;
    let product = await productModel.create({
-    //  image : req.file.buffer,
+     image : req.file.buffer,
      name,
      price ,
      discount ,
