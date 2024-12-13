@@ -12,7 +12,7 @@ function Card({ item }) {
     let getIdForCart = async(id) => {
       let token = localStorage.getItem('token')
       console.log(token)
-      await axios.post(`http://localhost:3000/cart/addToCart/${id}`,{},{
+      await axios.post(`https://deploy-mern-app-01-ecommerce-backend.vercel.app/cart/addToCart/${id}`,{},{
         headers : {
           "Authorization" : `Bearer ${token}`
         }

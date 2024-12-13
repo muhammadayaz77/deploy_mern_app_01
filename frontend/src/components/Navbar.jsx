@@ -12,7 +12,7 @@ function Navbar() {
   let handleLogout = () => {
   dispatch(logout())
   dispatch(logoutAdmin());
-    // navigate('/auth');
+    navigate('/auth');
       localStorage.removeItem('token');
       window.toastify("Logout Successfully",'success');
   }
