@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Buffer } from "buffer";
 import { MdDeleteForever } from "react-icons/md";
@@ -5,25 +6,33 @@ import { FaEdit } from "react-icons/fa";
 import axios from "axios";
 import Modal from "./Modal";
 
-function Cards({ item, fetchedData }) {
+function Cards({ item, data, setData }) {
   const [toModal, sendToModal] = useState(null); // Modal data
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal visibility
+  const [loading,setLoading] = useState(true);
 
   // Delete product handler
   const handleDelete = async (id) => {
-    let token = localStorage.getItem("token");
-    await axios
-      .delete(`https://deploy-mern-app-01-ecommerce-backend.vercel.app/products/delete-product/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        fetchedData(); // Refresh the list after deletion
-      })
-      .catch((err) => console.log(err));
+    const previousData = [...data]; // Backup the current state
+    setData((prevData) => prevData.filter((product) => product._id !== id)); // Remove immediately
+  
+    try {
+      let token = localStorage.getItem("token");
+      await axios.delete(
+        `https://deploy-mern-app-01-ecommerce-backend.vercel.app/products/delete-product/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      window.toastify("Data Deleted Successfully","success");
+    } catch (err) {
+      setData(previousData); // Revert state on failure
+      window.toastify("Something went wrong while deleting the product","error")
+    }
   };
-
+  
   // Handle "Edit" button click
   const handleEdit = (getItem) => {
     sendToModal(getItem); // Set modal data
@@ -35,8 +44,8 @@ function Cards({ item, fetchedData }) {
     console.log(updatedItem);
 
     let token = localStorage.getItem("token");
-    await axios
-      .put(
+    try {
+      await axios.put(
         `https://deploy-mern-app-01-ecommerce-backend.vercel.app/products/update-product/${updatedItem._id}`,
         updatedItem,
         {
@@ -44,12 +53,17 @@ function Cards({ item, fetchedData }) {
             Authorization: `Bearer ${token}`,
           },
         }
-      )
-      .then((res) => {
-        setIsModalOpen(false); // Close modal after update
-        fetchedData(); // Refresh data after update 
-      })
-      .catch((err) => console.log(err));
+      );
+      // Update the product in state
+      setData((prevData) =>
+        prevData.map((product) =>
+          product._id === updatedItem._id ? updatedItem : product
+        )
+      );
+      setIsModalOpen(false); // Close modal after update
+    } catch (err) {
+      console.error("Error updating product:", err);
+    }
   };
 
   const base64Image =
@@ -67,9 +81,9 @@ function Cards({ item, fetchedData }) {
         <div className="flex justify-between my-1 text-xl">
           <MdDeleteForever
             onClick={() => handleDelete(item._id)}
-            className="text-red-600"
+            className="text-red-600 cursor-pointer"
           />
-          <FaEdit onClick={() => handleEdit(item)} className="text-blue-600" />
+          <FaEdit onClick={() => handleEdit(item)} className="text-blue-600 cursor-pointer" />
         </div>
 
         {base64Image ? (
@@ -80,7 +94,7 @@ function Cards({ item, fetchedData }) {
           />
         ) : (
           <div className="h-full w-full bg-gray-200 flex items-center justify-center text-gray-500">
-            No
+            No Image Available
           </div>
         )}
       </div>
@@ -111,6 +125,10 @@ function Cards({ item, fetchedData }) {
           onUpdate={handleUpdate} // Handle update when submitted
         />
       )}
+
+      {/* loading section */}
+      
+
     </div>
   );
 }
