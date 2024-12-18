@@ -1,0 +1,2 @@
+This is ecommerce website : run on localhost
+backend is deployed
