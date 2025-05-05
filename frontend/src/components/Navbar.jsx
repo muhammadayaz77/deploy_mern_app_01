@@ -23,11 +23,13 @@ function Navbar() {
               <h1 className='text-zinc-600 font-bold text-3xl'>Scatch</h1>
 
       <div className='flex gap-5'>
-        <Link to='/shop'>Shop</Link>
         {
-          isAdminExist && <Link to='/owner'>Owner</Link>
+          isAdminExist ? <Link to='/owner'>Owner</Link> : 
+          <>
+          <Link to='/shop'>Shop</Link>
+          <Link to='/cart'>Cart</Link>
+          </>
         }
-        <Link to='/cart'>Cart</Link>
       </div>
       <button 
       onClick={handleLogout}
